@@ -26,13 +26,10 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
     
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-    <!-- Skip to main content for accessibility -->
-    <a href="#main" class="skip-link" tabindex="1">Skip to main content</a>
-    
     <!-- 3D Loading Page -->
     <div id="loading-page" class="loading-page" aria-hidden="true">
         <div class="loading-container">
@@ -139,10 +136,6 @@
                                 <h4>University</h4>
                                 <p>Parul University, Vadodara</p>
                             </div>
-                            <div class="stat-item">
-                                <h4>Expected Graduation</h4>
-                                <p>May 2027</p>
-                            </div>
                         </div>
                         <a href="#contact" class="btn">Get In Touch</a>
                     </div>
@@ -163,6 +156,8 @@
                             <li><i class="fab fa-python"></i> Python3</li>
                             <li><i class="fas fa-code"></i> C</li>
                             <li><i class="fas fa-database"></i> HANA ABAP</li>
+                            <li><i class="fab fa-code"></i> .Net  </li>
+
                         </ul>
                     </div>
                     
@@ -189,7 +184,7 @@
                     <div class="skill-category">
                         <h3><i class="fas fa-chart-line"></i> Additional Skills</h3>
                         <ul class="skills-list">
-                            <li><i class="fas fa-analytics"></i> Data Analysis</li>
+                            <li><i class="fas fa-database"></i> Data Analysis</li>
                             <li><i class="fas fa-lightbulb"></i> Problem-Solving</li>
                             <li><i class="fas fa-robot"></i> Automation</li>
                             <li><i class="fas fa-users"></i> Leadership</li>
@@ -230,15 +225,16 @@
                             </div>
                         </div>
                         <div class="project-links">
-                            <a href="#" class="project-link" aria-label="View live demo"><i class="fas fa-external-link-alt"></i></a>
-                            <a href="https://github.com/Abhijit1018" class="project-link" aria-label="View source code"><i class="fab fa-github"></i></a>
+                            <!-- No hosted demo available — link to repo README as the demo/details page -->
+                            <a href="https://github.com/Abhijit1018/AI-CHATBOT#readme" class="project-link" aria-label="View project details" target="_blank" rel="noopener noreferrer"><i class="fas fa-external-link-alt"></i></a>
+                            <a href="https://github.com/Abhijit1018/AI-CHATBOT" class="project-link" aria-label="View source code on GitHub" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i></a>
                         </div>
                     </div>
                     
                     <div class="project-card" data-category="database">
                         <div class="project-img">
-                            <!-- Fixed image URL -->
-                            <img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1f?w=400&h=250&fit=crop" alt="Hospital Database Management Project" loading="lazy" onerror="this.src='https://via.placeholder.com/400x250/8b5cf6/ffffff?text=Hospital+Database'">
+                            <!-- Local image provided in static/ -->
+                            <img src="static/hospital.svg" alt="Hospital Database Management Project" loading="lazy" onerror="this.src='https://via.placeholder.com/400x250/8b5cf6/ffffff?text=Hospital+Database'">
                         </div>
                         <div class="project-content">
                             <h3>Hospital Database Management (Prototype)</h3>
@@ -251,8 +247,9 @@
                             </div>
                         </div>
                         <div class="project-links">
-                            <a href="#" class="project-link" aria-label="View live demo"><i class="fas fa-external-link-alt"></i></a>
-                            <a href="https://github.com/Abhijit1018" class="project-link" aria-label="View source code"><i class="fab fa-github"></i></a>
+                            <!-- No hosted demo available — link to repo README as the demo/details page -->
+                            <a href="https://github.com/Abhijit1018/HOSPITAL-MANAGEMENT-SYSTEM#readme" class="project-link" aria-label="View project details" target="_blank" rel="noopener noreferrer"><i class="fas fa-external-link-alt"></i></a>
+                            <a href="https://github.com/Abhijit1018/HOSPITAL-MANAGEMENT-SYSTEM" class="project-link" aria-label="View source code on GitHub" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i></a>
                         </div>
                     </div>
                     
@@ -272,8 +269,88 @@
                             </div>
                         </div>
                         <div class="project-links">
-                            <a href="#" class="project-link" aria-label="View live demo"><i class="fas fa-external-link-alt"></i></a>
-                            <a href="https://github.com/Abhijit1018" class="project-link" aria-label="View source code"><i class="fab fa-github"></i></a>
+                            <!-- Portfolio has a hosted demo on Netlify -->
+                            <a href="https://abhijitdev.netlify.app/" class="project-link" aria-label="View live demo" target="_blank" rel="noopener noreferrer"><i class="fas fa-external-link-alt"></i></a>
+                            <a href="https://github.com/Abhijit1018/My-Portfolio-" class="project-link" aria-label="View source code on GitHub" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i></a>
+                        </div>
+                    </div>
+                    
+                    <!-- Additional projects auto-populated from GitHub -->
+                    <div class="project-card" data-category="web">
+                        <div class="project-img">
+                            <img src="https://opengraph.githubassets.com/1/Abhijit1018/Company-portfolio" alt="Company Portfolio" loading="lazy" onerror="this.src='https://via.placeholder.com/400x250/374151/ffffff?text=Company+Portfolio'">
+                        </div>
+                        <div class="project-content">
+                            <h3>Company Portfolio</h3>
+                            <p>A modern company portfolio website built with React, TypeScript, Three.js, and Framer Motion — dark mode, 3D effects and smooth animations.</p>
+                            <div class="project-tags">
+                                <span class="project-tag">TypeScript</span>
+                                <span class="project-tag">React</span>
+                                <span class="project-tag">Three.js</span>
+                            </div>
+                        </div>
+                        <div class="project-links">
+                            <a href="https://github.com/Abhijit1018/Company-portfolio#readme" class="project-link" aria-label="View project details" target="_blank" rel="noopener noreferrer"><i class="fas fa-external-link-alt"></i></a>
+                            <a href="https://github.com/Abhijit1018/Company-portfolio" class="project-link" aria-label="View source code on GitHub" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i></a>
+                        </div>
+                    </div>
+
+                    <div class="project-card" data-category="python">
+                        <div class="project-img">
+                            <!-- Local image provided in static/ -->
+                            <img src="static/petapp.webp" alt="Pet Adoption App" loading="lazy" onerror="this.src='https://via.placeholder.com/400x250/10b981/ffffff?text=Pet+Adoption+App'">
+                        </div>
+                        <div class="project-content">
+                            <h3>Pet Adoption App</h3>
+                            <p>Python-based app for pet adoption workflows. Includes backend logic for listing, searching, and adopting pets.</p>
+                            <div class="project-tags">
+                                <span class="project-tag">Python</span>
+                                <span class="project-tag">Flask</span>
+                                <span class="project-tag">Web</span>
+                            </div>
+                        </div>
+                        <div class="project-links">
+                            <a href="https://github.com/Abhijit1018/Pet-Adoption-app#readme" class="project-link" aria-label="View project details" target="_blank" rel="noopener noreferrer"><i class="fas fa-external-link-alt"></i></a>
+                            <a href="https://github.com/Abhijit1018/Pet-Adoption-app" class="project-link" aria-label="View source code on GitHub" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i></a>
+                        </div>
+                    </div>
+
+                    <div class="project-card" data-category="web">
+                        <div class="project-img">
+                            <!-- Local image provided in static/ -->
+                            <img src="static/redhope.png" alt="REDHOPE-2" loading="lazy" onerror="this.src='https://via.placeholder.com/400x250/f97316/ffffff?text=REDHOPE-2'">
+                        </div>
+                        <div class="project-content">
+                            <h3>REDHOPE-2</h3>
+                            <p>A static website / landing-page project showcasing layouts and responsive design (HTML/CSS).</p>
+                            <div class="project-tags">
+                                <span class="project-tag">HTML</span>
+                                <span class="project-tag">CSS</span>
+                                <span class="project-tag">Responsive</span>
+                            </div>
+                        </div>
+                        <div class="project-links">
+                            <a href="https://github.com/Abhijit1018/REDHOPE-2#readme" class="project-link" aria-label="View project details" target="_blank" rel="noopener noreferrer"><i class="fas fa-external-link-alt"></i></a>
+                            <a href="https://github.com/Abhijit1018/REDHOPE-2" class="project-link" aria-label="View source code on GitHub" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i></a>
+                        </div>
+                    </div>
+
+                    <div class="project-card" data-category="python">
+                        <div class="project-img">
+                            <img src="https://opengraph.githubassets.com/1/Abhijit1018/GFG160" alt="GFG160 - DSA solutions" loading="lazy" onerror="this.src='https://via.placeholder.com/400x250/2563eb/ffffff?text=GFG160'">
+                        </div>
+                        <div class="project-content">
+                            <h3>GFG160</h3>
+                            <p>Collection of daily DSA problem solutions from the 160-day challenge — well suited to demonstrate algorithms and problem solving.</p>
+                            <div class="project-tags">
+                                <span class="project-tag">Python</span>
+                                <span class="project-tag">Algorithms</span>
+                                <span class="project-tag">DSA</span>
+                            </div>
+                        </div>
+                        <div class="project-links">
+                            <a href="https://github.com/Abhijit1018/GFG160#readme" class="project-link" aria-label="View project details" target="_blank" rel="noopener noreferrer"><i class="fas fa-external-link-alt"></i></a>
+                            <a href="https://github.com/Abhijit1018/GFG160" class="project-link" aria-label="View source code on GitHub" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i></a>
                         </div>
                     </div>
                 </div>
@@ -285,6 +362,21 @@
             <div class="container">
                 <div class="section-title">
                     <h2 id="experience-heading">Experience</h2>
+                </div>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <h3>Python Django intern</h3>
+                            <h4>Infosys</h4>
+                            <span class="date">September 5 - November 2025</span>
+                            <p> Selected for a competitive 2-month virtual internship program focused on project development and innovation. 
+• Developing a full-stack project using Python, with Django for back-end logic, Streamlit for the interactive data application front-end, 
+and REST APIs for seamless data exchange. 
+• Collaborating in a batch of 27 interns under the guidance of an industry mentor to conceptualize, build, and pitch a technology 
+project to Infosys leadership. 
+• Working through a structured 4-milestone project lifecycle, involving both individual tasks and team-based problem-solving. </p>
+                        </div>
+                    </div>
                 </div>
                 <div class="timeline">
                     <div class="timeline-item">
@@ -312,14 +404,6 @@
                         <div class="institution">Parul University, Vadodara, Gujarat, India</div>
                         <div class="date">Expected Graduation: May 2027</div>
                         <p>Currently pursuing B.Tech in Computer Science with specialization in SAP. Coursework includes software development, data structures, algorithms, database management, and SAP technologies.</p>
-                    </div>
-                    
-                    <div class="education-card">
-                        <h3>High School</h3>
-                        <h4>Senior Secondary Education</h4>
-                        <div class="institution">Raghunath Senior Secondary School, Ratangarh, Rajasthan, India</div>
-                        <div class="date">2023</div>
-                        <p>Completed senior secondary education with strong foundation in mathematics and science subjects.</p>
                     </div>
                 </div>
             </div>
@@ -549,7 +633,7 @@
         </div>
     </footer>
 
-    <script src="js/main.js"></script>
-    <script src="js/model3d.js"></script>
+    <script src="main.js"></script>
+    <script src="model3d.js"></script>
 </body>
 </html>
