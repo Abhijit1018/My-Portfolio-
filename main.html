@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Abhijit Singh - Computer Science Student & Software Developer specializing in Python, SAP, Web Development">
+    <meta name="keywords" content="software developer, python developer, SAP, web development, computer science student">
+    <meta name="author" content="Abhijit Singh">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Abhijit Singh - Software Developer Portfolio">
+    <meta property="og:description" content="Computer Science student with expertise in Python, SAP, and full-stack development">
+    <meta property="og:type" content="website">
+    
+    <title>Abhijit Singh - Software Developer Portfolio</title>
+    
+    <!-- Fonts & Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Three.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+    
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <!-- 3D Loading Page -->
+    <div id="loading-page" class="loading-page" aria-hidden="true">
+        <div class="loading-container">
+            <div id="loading-canvas"></div>
+            <div class="loading-text">
+                <h1>Abhijit Singh</h1>
+                <p>Loading Portfolio...</p>
+                <div class="loading-bar">
+                    <div class="loading-progress"></div>
+                </div>
+                <div class="loading-percentage">0%</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Loading Animation (fallback) -->
+    <div class="loader-wrapper">
+        <div class="loader"></div>
+    </div>
+
+    <!-- Custom Cursor -->
+    <div class="custom-cursor"></div>
+    <div class="cursor-outline"></div>
+
+    <!-- Scroll to Top -->
+    <div class="scroll-top" role="button" tabindex="0" aria-label="Scroll to top">
+        <i class="fas fa-arrow-up" aria-hidden="true"></i>
+    </div>
+
+    <!-- Chatbot Widget -->
+    <div class="chatbot-container" id="chatbot-container">
+        <div class="chatbot-button" id="chatbot-button" role="button" tabindex="0" aria-label="Open chatbot">
+            <i class="fas fa-comment-dots"></i>
+        </div>
+        <div class="chatbot-window" id="chatbot-window">
+            <div class="chatbot-header">
+                <h3>Chat with me</h3>
+                <button class="chatbot-close" id="chatbot-close" aria-label="Close chatbot">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="chatbot-messages" id="chatbot-messages">
+                <div class="chatbot-message bot-message">
+                    <div class="message-content">
+                        <p>Hi! I'm Abhijit's AI assistant. How can I help you today?</p>
+                    </div>
+                </div>
+            </div>
+            <div class="chatbot-input-container">
+                <input type="text" class="chatbot-input" id="chatbot-input" placeholder="Type your message..." aria-label="Chat message input">
+                <button class="chatbot-send" id="chatbot-send" aria-label="Send message">
+                    <i class="fas fa-paper-plane"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header role="banner">
+        <nav class="header-inner" role="navigation" aria-label="Main navigation">
+            <a href="#home" class="logo" aria-label="Abhijit Singh - Home">AJ</a>
+            
+            <ul class="nav-menu" role="menubar">
+                <li role="none"><a href="#home" role="menuitem"><i class="fas fa-home" aria-hidden="true"></i>Home</a></li>
+                <li role="none"><a href="#about" role="menuitem"><i class="fas fa-user" aria-hidden="true"></i>About</a></li>
+                <li role="none"><a href="#skills" role="menuitem"><i class="fas fa-code" aria-hidden="true"></i>Skills</a></li>
+                <li role="none"><a href="#projects" role="menuitem"><i class="fas fa-briefcase" aria-hidden="true"></i>Projects</a></li>
+                <li role="none"><a href="#experience" role="menuitem"><i class="fas fa-timeline" aria-hidden="true"></i>Experience</a></li>
+                <li role="none"><a href="#contact" role="menuitem"><i class="fas fa-envelope" aria-hidden="true"></i>Contact</a></li>
+            </ul>
+            
+            <div class="header-controls">
+                <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark/light theme" aria-pressed="false">
+                    <i class="fas fa-moon" aria-hidden="true"></i>
+                </button>
+                <button class="mobile-menu-btn" aria-label="Open navigation menu" aria-expanded="false">
+                    <i class="fas fa-bars" aria-hidden="true"></i>
+                </button>
+            </div>
+            <button class="close-menu" aria-label="Close navigation menu">
+                <i class="fas fa-times" aria-hidden="true"></i>
+            </button>
+        </nav>
+    </header>
+
+    <main id="main" role="main">
+        <!-- Hero Section -->
+        <section id="home" class="hero" aria-labelledby="hero-heading">
+            <div id="hero-canvas" aria-hidden="true"></div>
+            <div class="hero-content container">
+                <div class="hero-text">
+                    <h1 id="hero-heading">Hi, I'm <span>Abhijit Singh</span></h1>
+                    <p>A motivated and detail-oriented Computer Science student with a strong foundation in software development, web technologies, and data analysis. Proficient in Python, C, and full-stack development with Flask and Django. Eager to leverage technical expertise and problem-solving skills to contribute to innovative software engineering projects.</p>
+                    <div class="hero-buttons">
+                        <a href="#projects" class="btn" role="button">View My Work</a>
+                        <a href="#contact" class="btn btn-outline" role="button">Contact Me</a>
+                    </div>
+                </div>
+                
+                <div class="hero-social" role="group" aria-label="Social media links">
+                    <a href="https://github.com/Abhijit1018" target="_blank" rel="noopener noreferrer" aria-label="Visit my GitHub profile">
+                        <i class="fab fa-github" aria-hidden="true"></i>
+                    </a>
+                    <a href="https://linkedin.com/in/abhijit-singh10" target="_blank" rel="noopener noreferrer" aria-label="Visit my LinkedIn profile">
+                        <i class="fab fa-linkedin" aria-hidden="true"></i>
+                    </a>
+                    <a href="mailto:abhijeetrathore104@gmail.com" aria-label="Send me an email">
+                        <i class="fas fa-envelope" aria-hidden="true"></i>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" aria-labelledby="about-heading">
+            <div class="container">
+                <div class="section-title">
+                    <h2 id="about-heading">About Me</h2>
+                </div>
+                <div class="about-content">
+                    <div class="about-text">
+                        <h3>Computer Science Student & Developer</h3>
+                        <p>I am a motivated Computer Science student at Parul University with a strong foundation in software development, web technologies, and data analysis. Currently pursuing B.Tech in Computer Science with SAP specialization, expected to graduate in May 2027.</p>
+                        <p>Proficient in C, Python3, and full-stack development with Flask and Django. I have hands-on experience with database management using MySQL, version control with Git & GitHub, and business intelligence tools like Power BI and HANA ABAP.</p>
+                        <p>My proven ability to design and implement practical solutions ranges from database systems to NLP-powered chatbots. I am fluent in English, Hindi, and Gujarati, with strong leadership, communication, and problem-solving skills.</p>
+                        <div class="about-stats">
+                            <div class="stat-item">
+                                <h4>Education</h4>
+                                <p>B.Tech Computer Science with SAP</p>
+                            </div>
+                            <div class="stat-item">
+                                <h4>University</h4>
+                                <p>Parul University, Vadodara</p>
+                            </div>
+                        </div>
+                        <a href="#contact" class="btn">Get In Touch</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Skills Section (Progress bars removed) -->
+        <section id="skills" aria-labelledby="skills-heading">
+            <div class="container">
+                <div class="section-title">
+                    <h2 id="skills-heading">My Skills</h2>
+                </div>
+                <div class="skills-content">
+                    <div class="skill-category">
+                        <h3><i class="fas fa-code"></i> Programming Languages</h3>
+                        <ul class="skills-list">
+                            <li><i class="fab fa-python"></i> Python3</li>
+                            <li><i class="fas fa-code"></i> C</li>
+                            <li><i class="fas fa-database"></i> HANA ABAP</li>
+                            <li><i class="fab fa-code"></i> .Net  </li>
+
+                        </ul>
+                    </div>
+                    
+                    <div class="skill-category">
+                        <h3><i class="fas fa-globe"></i> Web Development</h3>
+                        <ul class="skills-list">
+                            <li><i class="fab fa-html5"></i> HTML/CSS</li>
+                            <li><i class="fas fa-wind"></i> Tailwind CSS</li>
+                            <li><i class="fas fa-flask"></i> Flask</li>
+                            <li><i class="fab fa-python"></i> Django</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="skill-category">
+                        <h3><i class="fas fa-database"></i> Database & Tools</h3>
+                        <ul class="skills-list">
+                            <li><i class="fas fa-database"></i> MySQL</li>
+                            <li><i class="fab fa-git-alt"></i> Git & GitHub</li>
+                            <li><i class="fas fa-chart-bar"></i> Power BI</li>
+                            <li><i class="fas fa-server"></i> HANA ABAP</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="skill-category">
+                        <h3><i class="fas fa-chart-line"></i> Additional Skills</h3>
+                        <ul class="skills-list">
+                            <li><i class="fas fa-database"></i> Data Analysis</li>
+                            <li><i class="fas fa-lightbulb"></i> Problem-Solving</li>
+                            <li><i class="fas fa-robot"></i> Automation</li>
+                            <li><i class="fas fa-users"></i> Leadership</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section id="projects" aria-labelledby="projects-heading">
+            <div class="container">
+                <div class="section-title">
+                    <h2 id="projects-heading">My Projects</h2>
+                </div>
+                
+                <div class="projects-filter">
+                    <button class="filter-btn active" data-filter="all">All</button>
+                    <button class="filter-btn" data-filter="python">Python</button>
+                    <button class="filter-btn" data-filter="web">Web Development</button>
+                    <button class="filter-btn" data-filter="database">Database</button>
+                </div>
+                
+                <div class="projects-grid">
+                    <div class="project-card" data-category="python">
+                        <div class="project-img">
+                            <!-- Fixed image URL -->
+                            <img src="https://images.unsplash.com/photo-1531746790731-6c087fecd65a?w=400&h=250&fit=crop" alt="Personalized ChatBot Project" loading="lazy" onerror="this.src='https://via.placeholder.com/400x250/6366f1/ffffff?text=Personalized+ChatBot'">
+                        </div>
+                        <div class="project-content">
+                            <h3>Personalized Chat-Bot</h3>
+                            <p>Developed a chatbot using Python and natural language processing (NLP) techniques. Integrated with a web interface for user interaction, providing personalized responses based on user inputs.</p>
+                            <div class="project-tags">
+                                <span class="project-tag">Python</span>
+                                <span class="project-tag">NLP</span>
+                                <span class="project-tag">Flask</span>
+                                <span class="project-tag">Web Interface</span>
+                            </div>
+                        </div>
+                        <div class="project-links">
+                            <!-- No hosted demo available — link to repo README as the demo/details page -->
+                            <a href="https://github.com/Abhijit1018/AI-CHATBOT#readme" class="project-link" aria-label="View project details" target="_blank" rel="noopener noreferrer"><i class="fas fa-external-link-alt"></i></a>
+                            <a href="https://github.com/Abhijit1018/AI-CHATBOT" class="project-link" aria-label="View source code on GitHub" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i></a>
+                        </div>
+                    </div>
+                    
+                    <div class="project-card" data-category="database">
+                        <div class="project-img">
+                            <!-- Local image provided in static/ -->
+                            <img src="static/hospital.svg" alt="Hospital Database Management Project" loading="lazy" onerror="this.src='https://via.placeholder.com/400x250/8b5cf6/ffffff?text=Hospital+Database'">
+                        </div>
+                        <div class="project-content">
+                            <h3>Hospital Database Management (Prototype)</h3>
+                            <p>Designed and implemented a comprehensive database system for managing hospital records using MySQL. Created a user-friendly interface for data entry and retrieval with efficient query optimization.</p>
+                            <div class="project-tags">
+                                <span class="project-tag">MySQL</span>
+                                <span class="project-tag">Database Design</span>
+                                <span class="project-tag">Python</span>
+                                <span class="project-tag">Data Management</span>
+                            </div>
+                        </div>
+                        <div class="project-links">
+                            <!-- No hosted demo available — link to repo README as the demo/details page -->
+                            <a href="https://github.com/Abhijit1018/HOSPITAL-MANAGEMENT-SYSTEM#readme" class="project-link" aria-label="View project details" target="_blank" rel="noopener noreferrer"><i class="fas fa-external-link-alt"></i></a>
+                            <a href="https://github.com/Abhijit1018/HOSPITAL-MANAGEMENT-SYSTEM" class="project-link" aria-label="View source code on GitHub" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i></a>
+                        </div>
+                    </div>
+                    
+                    <div class="project-card" data-category="web">
+                        <div class="project-img">
+                            <!-- Fixed image URL -->
+                            <img src="https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?w=400&h=250&fit=crop" alt="Portfolio Website Project" loading="lazy" onerror="this.src='https://via.placeholder.com/400x250/a855f7/ffffff?text=Portfolio+Website'">
+                        </div>
+                        <div class="project-content">
+                            <h3>Portfolio Website</h3>
+                            <p>A responsive portfolio website built with HTML, CSS, and JavaScript featuring 3D animations, modern design principles, and accessibility features.</p>
+                            <div class="project-tags">
+                                <span class="project-tag">HTML</span>
+                                <span class="project-tag">CSS</span>
+                                <span class="project-tag">JavaScript</span>
+                                <span class="project-tag">Three.js</span>
+                            </div>
+                        </div>
+                        <div class="project-links">
+                            <!-- Portfolio has a hosted demo on Netlify -->
+                            <a href="https://abhijitdev.netlify.app/" class="project-link" aria-label="View live demo" target="_blank" rel="noopener noreferrer"><i class="fas fa-external-link-alt"></i></a>
+                            <a href="https://github.com/Abhijit1018/My-Portfolio-" class="project-link" aria-label="View source code on GitHub" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i></a>
+                        </div>
+                    </div>
+                    
+                    <!-- Additional projects auto-populated from GitHub -->
+                    <div class="project-card" data-category="web">
+                        <div class="project-img">
+                            <img src="https://opengraph.githubassets.com/1/Abhijit1018/Company-portfolio" alt="Company Portfolio" loading="lazy" onerror="this.src='https://via.placeholder.com/400x250/374151/ffffff?text=Company+Portfolio'">
+                        </div>
+                        <div class="project-content">
+                            <h3>Company Portfolio</h3>
+                            <p>A modern company portfolio website built with React, TypeScript, Three.js, and Framer Motion — dark mode, 3D effects and smooth animations.</p>
+                            <div class="project-tags">
+                                <span class="project-tag">TypeScript</span>
+                                <span class="project-tag">React</span>
+                                <span class="project-tag">Three.js</span>
+                            </div>
+                        </div>
+                        <div class="project-links">
+                            <a href="https://github.com/Abhijit1018/Company-portfolio#readme" class="project-link" aria-label="View project details" target="_blank" rel="noopener noreferrer"><i class="fas fa-external-link-alt"></i></a>
+                            <a href="https://github.com/Abhijit1018/Company-portfolio" class="project-link" aria-label="View source code on GitHub" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i></a>
+                        </div>
+                    </div>
+
+                    <div class="project-card" data-category="python">
+                        <div class="project-img">
+                            <!-- Local image provided in static/ -->
+                            <img src="static/petapp.webp" alt="Pet Adoption App" loading="lazy" onerror="this.src='https://via.placeholder.com/400x250/10b981/ffffff?text=Pet+Adoption+App'">
+                        </div>
+                        <div class="project-content">
+                            <h3>Pet Adoption App</h3>
+                            <p>Python-based app for pet adoption workflows. Includes backend logic for listing, searching, and adopting pets.</p>
+                            <div class="project-tags">
+                                <span class="project-tag">Python</span>
+                                <span class="project-tag">Flask</span>
+                                <span class="project-tag">Web</span>
+                            </div>
+                        </div>
+                        <div class="project-links">
+                            <a href="https://github.com/Abhijit1018/Pet-Adoption-app#readme" class="project-link" aria-label="View project details" target="_blank" rel="noopener noreferrer"><i class="fas fa-external-link-alt"></i></a>
+                            <a href="https://github.com/Abhijit1018/Pet-Adoption-app" class="project-link" aria-label="View source code on GitHub" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i></a>
+                        </div>
+                    </div>
+
+                    <div class="project-card" data-category="web">
+                        <div class="project-img">
+                            <!-- Local image provided in static/ -->
+                            <img src="static/redhope.png" alt="REDHOPE-2" loading="lazy" onerror="this.src='https://via.placeholder.com/400x250/f97316/ffffff?text=REDHOPE-2'">
+                        </div>
+                        <div class="project-content">
+                            <h3>REDHOPE-2</h3>
+                            <p>A static website / landing-page project showcasing layouts and responsive design (HTML/CSS).</p>
+                            <div class="project-tags">
+                                <span class="project-tag">HTML</span>
+                                <span class="project-tag">CSS</span>
+                                <span class="project-tag">Responsive</span>
+                            </div>
+                        </div>
+                        <div class="project-links">
+                            <a href="https://github.com/Abhijit1018/REDHOPE-2#readme" class="project-link" aria-label="View project details" target="_blank" rel="noopener noreferrer"><i class="fas fa-external-link-alt"></i></a>
+                            <a href="https://github.com/Abhijit1018/REDHOPE-2" class="project-link" aria-label="View source code on GitHub" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i></a>
+                        </div>
+                    </div>
+
+                    <div class="project-card" data-category="python">
+                        <div class="project-img">
+                            <img src="https://opengraph.githubassets.com/1/Abhijit1018/GFG160" alt="GFG160 - DSA solutions" loading="lazy" onerror="this.src='https://via.placeholder.com/400x250/2563eb/ffffff?text=GFG160'">
+                        </div>
+                        <div class="project-content">
+                            <h3>GFG160</h3>
+                            <p>Collection of daily DSA problem solutions from the 160-day challenge — well suited to demonstrate algorithms and problem solving.</p>
+                            <div class="project-tags">
+                                <span class="project-tag">Python</span>
+                                <span class="project-tag">Algorithms</span>
+                                <span class="project-tag">DSA</span>
+                            </div>
+                        </div>
+                        <div class="project-links">
+                            <a href="https://github.com/Abhijit1018/GFG160#readme" class="project-link" aria-label="View project details" target="_blank" rel="noopener noreferrer"><i class="fas fa-external-link-alt"></i></a>
+                            <a href="https://github.com/Abhijit1018/GFG160" class="project-link" aria-label="View source code on GitHub" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Experience Section -->
+        <section id="experience" aria-labelledby="experience-heading">
+            <div class="container">
+                <div class="section-title">
+                    <h2 id="experience-heading">Experience</h2>
+                </div>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <h3>Python Django intern</h3>
+                            <h4>Infosys</h4>
+                            <span class="date">September 5 - November 2025</span>
+                            <p> Selected for a competitive 2-month virtual internship program focused on project development and innovation. 
+• Developing a full-stack project using Python, with Django for back-end logic, Streamlit for the interactive data application front-end, 
+and REST APIs for seamless data exchange. 
+• Collaborating in a batch of 27 interns under the guidance of an industry mentor to conceptualize, build, and pitch a technology 
+project to Infosys leadership. 
+• Working through a structured 4-milestone project lifecycle, involving both individual tasks and team-based problem-solving. </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <h3>Admission Assistant</h3>
+                            <h4>Parul University</h4>
+                            <span class="date">May 2024 - September 2024</span>
+                            <p>Assisted in managing admissions and provided comprehensive support to prospective students. Developed strong organizational and communication skills in a professional environment. Handled student inquiries, processed applications, and coordinated with various departments to ensure smooth admission processes.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Education Section -->
+        <section id="education" aria-labelledby="education-heading">
+            <div class="container">
+                <div class="section-title">
+                    <h2 id="education-heading">Education</h2>
+                </div>
+                <div class="education-cards">
+                    <div class="education-card">
+                        <h3>Bachelor of Technology</h3>
+                        <h4>Computer Science with SAP</h4>
+                        <div class="institution">Parul University, Vadodara, Gujarat, India</div>
+                        <div class="date">Expected Graduation: May 2027</div>
+                        <p>Currently pursuing B.Tech in Computer Science with specialization in SAP. Coursework includes software development, data structures, algorithms, database management, and SAP technologies.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Certifications Section -->
+        <section id="certifications" aria-labelledby="certifications-heading">
+            <div class="container">
+                <div class="section-title">
+                    <h2 id="certifications-heading">Achievements & Certifications</h2>
+                </div>
+                <div class="certification-cards">
+                    <div class="certification-card">
+                        <div class="certification-icon">
+                            <i class="fas fa-certificate"></i>
+                        </div>
+                        <div class="certification-content">
+                            <h3>SAP Certified Associate</h3>
+                            <h4>Back-End Developer – ABAP Cloud</h4>
+                            <div class="date">2024</div>
+                            <p>Official SAP certification demonstrating proficiency in ABAP Cloud development, modern SAP development practices, and cloud-based solutions.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="certification-card">
+                        <div class="certification-icon">
+                            <i class="fab fa-google"></i>
+                        </div>
+                        <div class="certification-content">
+                            <h3>Generative AI</h3>
+                            <h4>Google & UPSkill</h4>
+                            <div class="date">2024</div>
+                            <p>Comprehensive training in generative AI technologies, machine learning concepts, and practical applications of AI in modern software development.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="certification-card">
+                        <div class="certification-icon">
+                            <i class="fas fa-code"></i>
+                        </div>
+                        <div class="certification-content">
+                            <h3>Software Engineering and Agile Development</h3>
+                            <h4>Infosys</h4>
+                            <div class="date">2024</div>
+                            <p>Advanced training in software engineering principles, agile methodologies, project management, and modern development practices.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="certification-card">
+                        <div class="certification-icon">
+                            <i class="fab fa-python"></i>
+                        </div>
+                        <div class="certification-content">
+                            <h3>Python Foundation Certification</h3>
+                            <h4>Infosys</h4>
+                            <div class="date">2024</div>
+                            <p>Foundation level certification in Python programming covering core concepts, data structures, and practical programming applications.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="certification-card">
+                        <div class="certification-icon">
+                            <i class="fas fa-database"></i>
+                        </div>
+                        <div class="certification-content">
+                            <h3>Database Management System</h3>
+                            <h4>Infosys</h4>
+                            <div class="date">2024</div>
+                            <p>Comprehensive training in database design, SQL, normalization, and database management best practices.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="certification-card">
+                        <div class="certification-icon">
+                            <i class="fas fa-chart-bar"></i>
+                        </div>
+                        <div class="certification-content">
+                            <h3>Introduction to Data Science</h3>
+                            <h4>Infosys</h4>
+                            <div class="date">2024</div>
+                            <p>Foundation course in data science covering statistical analysis, data visualization, and machine learning basics.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="certification-card">
+                        <div class="certification-icon">
+                            <i class="fas fa-server"></i>
+                        </div>
+                        <div class="certification-content">
+                            <h3>Introduction to NoSQL Databases</h3>
+                            <h4>Infosys</h4>
+                            <div class="date">2024</div>
+                            <p>Training in NoSQL database technologies, document databases, and modern data storage solutions.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" aria-labelledby="contact-heading">
+            <div class="container">
+                <div class="section-title">
+                    <h2 id="contact-heading">Contact Me</h2>
+                </div>
+                <div class="contact-content">
+                    <div class="contact-info">
+                        <h3>Get In Touch</h3>
+                        
+                        <div class="info-item">
+                            <i class="fas fa-map-marker-alt" aria-hidden="true"></i>
+                            <div class="info-details">
+                                <h4>Location</h4>
+                                <p>Vadodara, Gujarat, India</p>
+                            </div>
+                        </div>
+                        
+                        <div class="info-item">
+                            <i class="fas fa-envelope" aria-hidden="true"></i>
+                            <div class="info-details">
+                                <h4>Email</h4>
+                                <p><a href="mailto:abhijeetrathore104@gmail.com">abhijeetrathore104@gmail.com</a></p>
+                            </div>
+                        </div>
+                        
+                        <div class="info-item">
+                            <i class="fas fa-phone" aria-hidden="true"></i>
+                            <div class="info-details">
+                                <h4>Phone</h4>
+                                <p><a href="tel:+919376481607">+91 9376481607</a></p>
+                            </div>
+                        </div>
+                        
+                        <div class="info-item">
+                            <i class="fab fa-github" aria-hidden="true"></i>
+                            <div class="info-details">
+                                <h4>GitHub</h4>
+                                <p><a href="https://github.com/Abhijit1018" target="_blank" rel="noopener noreferrer">github.com/Abhijit1018</a></p>
+                            </div>
+                        </div>
+                        
+                        <div class="info-item">
+                            <i class="fab fa-linkedin" aria-hidden="true"></i>
+                            <div class="info-details">
+                                <h4>LinkedIn</h4>
+                                <p><a href="https://linkedin.com/in/abhijit-singh10" target="_blank" rel="noopener noreferrer">linkedin.com/in/abhijit-singh10</a></p>
+                            </div>
+                        </div>
+                        
+                        <div class="info-item">
+                            <i class="fas fa-globe" aria-hidden="true"></i>
+                            <div class="info-details">
+                                <h4>Languages</h4>
+                                <p>English, Hindi, Gujarati</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <form class="contact-form" id="contact-form" novalidate>
+                        <div class="form-group">
+                            <input type="text" name="name" class="form-control" placeholder="Your Name" required>
+                            <div class="form-error"></div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <input type="email" name="email" class="form-control" placeholder="Your Email" required>
+                            <div class="form-error"></div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <input type="text" name="subject" class="form-control" placeholder="Subject" required>
+                            <div class="form-error"></div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <textarea name="message" class="form-control" rows="5" placeholder="Your Message" required></textarea>
+                            <div class="form-error"></div>
+                        </div>
+                        
+                        <button type="submit" class="btn">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer role="contentinfo">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-col">
+                    <h3>Abhijit Singh</h3>
+                    <p>Computer Science student with a passion for software development, data analysis, and innovative technology solutions.</p>
+                    <div class="footer-social">
+                        <a href="https://github.com/Abhijit1018" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                        <a href="https://linkedin.com/in/abhijit-singh10" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                        <a href="mailto:abhijeetrathore104@gmail.com" aria-label="Email"><i class="fas fa-envelope"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-col">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#skills">Skills</a></li>
+                        <li><a href="#projects">Projects</a></li>
+                        <li><a href="#experience">Experience</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h3>Interests</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Software Development</a></li>
+                        <li><a href="#">Data Analysis</a></li>
+                        <li><a href="#">Automation</a></li>
+                        <li><a href="#">Web Technologies</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2025 Abhijit Singh. All rights reserved. Made with ❤️</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script src="js/model3d.js"></script>
+    <script src="js/chatbot.js"></script>
+</body>
+</html>

@@ -1,0 +1,662 @@
+{
+  "name": "My workflow",
+  "nodes": [
+    {
+      "parameters": {
+        "updates": [
+          "message"
+        ],
+        "additionalFields": {
+          "chatIds": "6242763937"
+        }
+      },
+      "type": "n8n-nodes-base.telegramTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        -2064,
+        240
+      ],
+      "id": "46802044-1970-499f-9a98-d72c1d344e18",
+      "name": "Telegram Trigger",
+      "webhookId": "aeaaee24-2aed-439d-9e7f-892890a18321",
+      "credentials": {
+        "telegramApi": {
+          "id": "3tmrzWDM6mmE9RcK",
+          "name": "Telegram account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $('Telegram Trigger').item.json.message.document.file_id }}",
+                    "rightValue": "",
+                    "operator": {
+                      "type": "string",
+                      "operation": "exists",
+                      "singleValue": true
+                    },
+                    "id": "9e67bd13-904c-4de3-a238-ee065bbf56f1"
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "File"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "b93cbd58-c7ef-430d-a90a-490164114260",
+                    "leftValue": "={{ $('Telegram Trigger').item.json.message.text }}",
+                    "rightValue": "",
+                    "operator": {
+                      "type": "string",
+                      "operation": "exists",
+                      "singleValue": true
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Text"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.2,
+      "position": [
+        -1840,
+        304
+      ],
+      "id": "aecbf6b8-79d3-4ae5-aa11-51501936e9db",
+      "name": "Switch"
+    },
+    {
+      "parameters": {
+        "resource": "file",
+        "fileId": "={{ $('Telegram Trigger').item.json.message.document.file_id }}",
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        -1488,
+        176
+      ],
+      "id": "8252152f-d0a7-4c10-b55e-b530ee2976a3",
+      "name": "Get a file",
+      "webhookId": "22374e7f-68a6-48ce-a34e-997e38a376fe",
+      "credentials": {
+        "telegramApi": {
+          "id": "3tmrzWDM6mmE9RcK",
+          "name": "Telegram account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://cloud.flowiseai.com/api/v1/attachments/5fe2ae21-7e05-4c9d-9e0d-f50ddb7afca7/5fe2ae21-7e05-4c9d-9e0d-f50ddb7afca7",
+        "sendBody": true,
+        "contentType": "multipart-form-data",
+        "bodyParameters": {
+          "parameters": [
+            {
+              "parameterType": "formBinaryData",
+              "name": "files",
+              "inputDataFieldName": "data"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -1232,
+        160
+      ],
+      "id": "d69f8af9-2e9a-4e16-acd4-be585a2e406f",
+      "name": "HTTP Request"
+    },
+    {
+      "parameters": {
+        "mode": "raw",
+        "jsonOutput": "={\n  \"questions\": \"This is my resume, save this for future reference.\",\n  \"uploads\": [\n{\n  \"data\" : \"{{$json.content.replaceAll('\\n', '').replaceAll('\"', '')}}\",\n  \"type\" : \"file:full\",\n  \"name\" : \"{{ $('Telegram Trigger').item.json.message.document.file_name }}\",\n  \"mime\" : \"{{ $json.mimeType }}\"\n}    \n  ]\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -416,
+        176
+      ],
+      "id": "73463fa2-7b14-498e-8370-59e72c5b6693",
+      "name": "Edit Fields1"
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $('Telegram Trigger').item.json.message.chat.id }}",
+        "text": "=Your resume has been saved. \n\n{{ $json.output }}",
+        "additionalFields": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        448,
+        32
+      ],
+      "id": "78ba4181-aabc-4041-bb98-2895fd4374fb",
+      "name": "Send a text message",
+      "webhookId": "afab3863-db96-4f8f-8dd7-811a613f0f95",
+      "credentials": {
+        "telegramApi": {
+          "id": "3tmrzWDM6mmE9RcK",
+          "name": "Telegram account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $('Telegram Trigger').item.json.message.chat.id }}",
+        "text": "=Email Sent ✅\n\n",
+        "additionalFields": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        144,
+        848
+      ],
+      "id": "c9a4d4fd-102f-4014-b2e1-ae6283561785",
+      "name": "Send a text message1",
+      "webhookId": "afab3863-db96-4f8f-8dd7-811a613f0f95",
+      "credentials": {
+        "telegramApi": {
+          "id": "3tmrzWDM6mmE9RcK",
+          "name": "Telegram account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sendTo": "={{ $('Code in JavaScript').item.json.email }}",
+        "subject": "={{ $('Requesting subject line').item.json.text }}",
+        "message": "={{ $('For body').item.json.text }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        -112,
+        1088
+      ],
+      "id": "1cded08f-9389-46af-a212-4b6706d35ce1",
+      "name": "Send a message",
+      "webhookId": "db50e583-011e-4710-996b-12ac3a20b725",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "V1UNXBcVLfO7LF4t",
+          "name": "Gmail account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const text = $('Telegram Trigger').first().json.message.text;\nconst emailRegex = /[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}/;\nconst match = text.match(emailRegex);\nconst email = match ? match[0] : '';\n\nreturn [{ json: { email } }];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -784,
+        800
+      ],
+      "id": "77341d86-fb0c-4009-8126-471bc6fed079",
+      "name": "Code in JavaScript"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "34d59493-314b-48b8-86f3-efb503cbb604",
+              "leftValue": "={{ $('body agent').item.json.output }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "exists",
+                "singleValue": true
+              }
+            },
+            {
+              "id": "ff00d959-d815-4499-98b9-0871e2cd0cd2",
+              "leftValue": "={{ $('subject1').item.json.output }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "exists",
+                "singleValue": true
+              }
+            },
+            {
+              "id": "d59a06cb-3c6e-4738-b397-d61565654dcb",
+              "leftValue": "={{ $('Code in JavaScript').item.json.email }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "exists",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        -816,
+        592
+      ],
+      "id": "bf862e33-ebb9-40cd-adf0-658fe3a829a5",
+      "name": "If"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $json.questions }}\n{{ $('HTTP Request').item.json.content }}",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2.2,
+      "position": [
+        -128,
+        0
+      ],
+      "id": "7e333b59-586a-4e55-9ae5-723245c43dd8",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        -16,
+        448
+      ],
+      "id": "b1baf144-6df9-48c2-b4af-2f22dc6ec792",
+      "name": "Google Gemini Chat Model",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "Tf9t7uLPwRccMn2e",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sessionIdType": "customKey",
+        "sessionKey": "={{ $('Telegram Trigger').item.json.message.chat.id }}",
+        "contextWindowLength": 10
+      },
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.3,
+      "position": [
+        352,
+        656
+      ],
+      "id": "8d3c0d3a-df1b-4a23-84b5-e1e8ad1a8633",
+      "name": "Simple Memory"
+    },
+    {
+      "parameters": {
+        "mode": "raw",
+        "jsonOutput": "={\n  \"questions\": \"Use the detailed information from my resume provided earlier to write the complete email body to a recruiter who posted a job opening on LinkedIn. Make the tone professional yet warm and engaging. Reflect my key skills, experiences, and accomplishments relevant to the job, and subtly highlight how my background aligns with the role. The email should be concise, respectful, and convey enthusiasm for the opportunity. Avoid generic phrases and make it sound personalized and humanized. here;s the post text from the recruiter : {{ $('Telegram Trigger').item.json.message.text.replaceAll('\"','').replaceAll('\\n','') }}\",\n  \"overrrideConfig\": \n{\n  \"sessionId\" : \"{{ $('Telegram Trigger').item.json.message.chat.id }}\"\n}    \n\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -1520,
+        832
+      ],
+      "id": "43b53eb3-b163-4c8f-89b6-66a55a4f69ec",
+      "name": "body"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $json.questions }}",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2.2,
+      "position": [
+        -1296,
+        400
+      ],
+      "id": "40b87abd-a7ce-47e6-875b-f2602f55ab10",
+      "name": "body agent"
+    },
+    {
+      "parameters": {
+        "mode": "raw",
+        "jsonOutput": "={\n  \"questions\": \"This is the post a recruiter posted give me a short email subject line for this catchy and hooked and humanized , use my resume shared before for reference and just provide me the subject line text for this post : {{ $('Telegram Trigger').item.json.message.text.replaceAll('\"','').replaceAll('\\n','') }}\",\n  \"overrrideConfig\": \n{\n  \"sessionId\" : \"{{ $('Telegram Trigger').item.json.message.chat.id }}\"\n}    \n\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -1088,
+        1168
+      ],
+      "id": "19ccfa37-f213-43c1-8c67-e62585f9b993",
+      "name": "subject"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $json.questions }}",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2.2,
+      "position": [
+        -864,
+        1120
+      ],
+      "id": "39779f02-8a58-4c98-b024-6099025bd590",
+      "name": "subject1"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "976afad6-a38f-4bcf-a345-779cd8815e66",
+              "name": "data",
+              "value": "={   \"data\" : \"{{$json.content.replaceAll('\\n', '').replaceAll('\"', '')}}\"",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -1024,
+        160
+      ],
+      "id": "6f1dd102-9c5b-4648-996d-86c86c449d4e",
+      "name": "Edit Fields"
+    }
+  ],
+  "pinData": {
+    "Telegram Trigger": [
+      {
+        "json": {
+          "name": "First item",
+          "code": 1
+        }
+      },
+      {
+        "json": {
+          "name": "Second item",
+          "code": 2
+        }
+      }
+    ]
+  },
+  "connections": {
+    "Telegram Trigger": {
+      "main": [
+        [
+          {
+            "node": "Switch",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Switch": {
+      "main": [
+        [
+          {
+            "node": "Get a file",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "body",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get a file": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields1": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript": {
+      "main": [
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send a message": {
+      "main": [
+        [
+          {
+            "node": "Send a text message1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        [
+          {
+            "node": "Send a text message1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          },
+          {
+            "node": "body agent",
+            "type": "ai_languageModel",
+            "index": 0
+          },
+          {
+            "node": "subject1",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Simple Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_memory",
+            "index": 0
+          },
+          {
+            "node": "body agent",
+            "type": "ai_memory",
+            "index": 0
+          },
+          {
+            "node": "subject1",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent": {
+      "main": [
+        [
+          {
+            "node": "Send a text message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "body": {
+      "main": [
+        [
+          {
+            "node": "body agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "body agent": {
+      "main": [
+        [
+          {
+            "node": "subject",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "subject": {
+      "main": [
+        [
+          {
+            "node": "subject1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "subject1": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "e79e8da4-6aeb-41b7-87c9-8353c3487732",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "bd08a1772b1ff3847919224ef89d68a22a4c5b501dc5bcd9002a5e1caa7a9f7d"
+  },
+  "id": "sLg1foj7UguKhoA3",
+  "tags": []
+}
