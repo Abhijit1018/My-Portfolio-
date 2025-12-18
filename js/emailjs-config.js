@@ -56,7 +56,7 @@ class EmailJSHandler {
                     from_email: formData.email,
                     subject: formData.subject,
                     message: formData.message,
-                    to_email: 'abhijeetrathore104@gmail.com' // Your email address
+                    to_email: 'rothoreabhijeet@gmail.com' // Your email address
                 }
             );
 
