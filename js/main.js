@@ -401,6 +401,9 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         });
 
+        // Initialize EmailJS handler
+        const emailHandler = new EmailJSHandler('contact-form');
+
         contactForm.addEventListener('submit', async (e) => {
             e.preventDefault();
             
@@ -419,27 +422,48 @@ document.addEventListener('DOMContentLoaded', function() {
                 submitBtn.textContent = 'Sending...';
                 
                 try {
-                    // Simulate form submission
-                    await new Promise(resolve => setTimeout(resolve, 2000));
+                    // Get form data
+                    const formData = emailHandler.getFormData();
                     
-                    announceToScreenReader('Message sent successfully!');
-                    contactForm.reset();
+                    // Send email via EmailJS
+                    const result = await emailHandler.sendEmail(formData);
                     
-                    // Show success message
-                    const successDiv = document.createElement('div');
-                    successDiv.className = 'alert alert-success';
-                    successDiv.textContent = 'Thank you! Your message has been sent successfully.';
-                    contactForm.appendChild(successDiv);
-                    
-                    setTimeout(() => {
-                        if (successDiv.parentNode) {
-                            successDiv.parentNode.removeChild(successDiv);
-                        }
-                    }, 5000);
+                    if (result.success) {
+                        announceToScreenReader('Message sent successfully!');
+                        contactForm.reset();
+                        
+                        // Show success message
+                        const successDiv = document.createElement('div');
+                        successDiv.className = 'alert alert-success';
+                        successDiv.textContent = result.message;
+                        successDiv.style.cssText = 'padding: 15px; margin-top: 20px; background: #10b981; color: white; border-radius: 8px; text-align: center;';
+                        contactForm.appendChild(successDiv);
+                        
+                        setTimeout(() => {
+                            if (successDiv.parentNode) {
+                                successDiv.parentNode.removeChild(successDiv);
+                            }
+                        }, 5000);
+                    } else {
+                        throw new Error(result.message);
+                    }
                     
                 } catch (error) {
                     announceToScreenReader('Error sending message. Please try again.');
                     console.error('Form submission error:', error);
+                    
+                    // Show error message
+                    const errorDiv = document.createElement('div');
+                    errorDiv.className = 'alert alert-error';
+                    errorDiv.textContent = error.message || 'Sorry, there was an error sending your message. Please try again or email me directly at abhijeetrathore104@gmail.com';
+                    errorDiv.style.cssText = 'padding: 15px; margin-top: 20px; background: #ef4444; color: white; border-radius: 8px; text-align: center;';
+                    contactForm.appendChild(errorDiv);
+                    
+                    setTimeout(() => {
+                        if (errorDiv.parentNode) {
+                            errorDiv.parentNode.removeChild(errorDiv);
+                        }
+                    }, 5000);
                 } finally {
                     submitBtn.disabled = false;
                     submitBtn.textContent = originalText;
