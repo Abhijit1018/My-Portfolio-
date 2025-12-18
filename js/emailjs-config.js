@@ -3,13 +3,13 @@
 
 const EMAILJS_CONFIG = {
     // Your EmailJS Public Key (from Dashboard > Account > API Keys)
-    publicKey: 'YOUR_PUBLIC_KEY',
+    publicKey: '-EHc2Z7r5P8M-dAy7',
     
     // Your EmailJS Service ID (from Dashboard > Email Services)
-    serviceId: 'YOUR_SERVICE_ID',
+    serviceId: 'service_xvo6t6g',
     
     // Your EmailJS Template ID (from Dashboard > Email Templates)
-    templateId: 'YOUR_TEMPLATE_ID'
+    templateId: 'template_i0c83sw'
 };
 
 // ===== EMAILJS FORM HANDLER =====
