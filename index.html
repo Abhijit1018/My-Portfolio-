@@ -59,6 +59,34 @@
         <i class="fas fa-arrow-up" aria-hidden="true"></i>
     </div>
 
+    <!-- Chatbot Widget -->
+    <div class="chatbot-container" id="chatbot-container">
+        <div class="chatbot-button" id="chatbot-button" role="button" tabindex="0" aria-label="Open chatbot">
+            <i class="fas fa-comment-dots"></i>
+        </div>
+        <div class="chatbot-window" id="chatbot-window">
+            <div class="chatbot-header">
+                <h3>Chat with me</h3>
+                <button class="chatbot-close" id="chatbot-close" aria-label="Close chatbot">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="chatbot-messages" id="chatbot-messages">
+                <div class="chatbot-message bot-message">
+                    <div class="message-content">
+                        <p>Hi! I'm Abhijit's AI assistant. How can I help you today?</p>
+                    </div>
+                </div>
+            </div>
+            <div class="chatbot-input-container">
+                <input type="text" class="chatbot-input" id="chatbot-input" placeholder="Type your message..." aria-label="Chat message input">
+                <button class="chatbot-send" id="chatbot-send" aria-label="Send message">
+                    <i class="fas fa-paper-plane"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
     <!-- Header -->
     <header role="banner">
         <nav class="header-inner" role="navigation" aria-label="Main navigation">
@@ -635,7 +663,6 @@ project to Infosys leadership.
 
     <script src="js/main.js"></script>
     <script src="js/model3d.js"></script>
+    <script src="js/chatbot.js"></script>
 </body>
 </html>
-
-
